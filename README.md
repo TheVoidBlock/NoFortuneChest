@@ -7,7 +7,7 @@ Displays a title warning when you start to mine an Ender Chest with a Diamond/Ne
 All the text and colors are configurable through ModMenu.
 
 ## Config Screen
-![Config Screen](https://cdn.modrinth.com/data/cached_images/6607a1268a7b3243e57812d204b6cd0cfa9e92e7.png)
+![Config Screen](https://cdn.modrinth.com/data/4QufRNTv/images/285b9fcc0b435ed73ded5a38c97a13527e14548b.png)
 
 ## Action Bar Warning
 ![Action Bar Warning](https://cdn.modrinth.com/data/cached_images/6607a1268a7b3243e57812d204b6cd0cfa9e92e7.png)
