@@ -17,9 +17,6 @@
   "environment": "client",
   "entrypoints": {
     "client": [
-      "com.thevoidblock.nofortunechest.client.NoFortuneChestClient"
-    ],
-    "main": [
       "com.thevoidblock.nofortunechest.NoFortuneChest"
     ],
     "modmenu": [
