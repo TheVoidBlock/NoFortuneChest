@@ -17,6 +17,6 @@ public class NoFortuneChest implements ClientModInitializer {
         AutoConfig.register(ModConfig.class, JanksonConfigSerializer::new);
         NonSilkWarning.initializeDetection();
 
-        LOGGER.info(String.format("%s initialized!", MOD_ID));
+        LOGGER.info("{} initialized!", MOD_ID);
     }
 }
