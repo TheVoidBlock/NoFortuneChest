@@ -5,6 +5,7 @@ import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.minecraft.block.Blocks;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.text.Text;
@@ -30,21 +31,20 @@ public class NonSilkWarning {
                     boolean value = true;
                 };
 
-                client.player.getHandItems().forEach(itemStack -> {
+                ItemStack itemStack = client.player.getInventory().getSelectedStack();
 
-                    Set<RegistryEntry<Enchantment>> enchantments = itemStack.getEnchantments().getEnchantments();
-                    Item item = itemStack.getItem();
+                Set<RegistryEntry<Enchantment>> enchantments = itemStack.getEnchantments().getEnchantments();
+                Item item = itemStack.getItem();
 
-                    if(
-                            (
-                                item.equals(Items.NETHERITE_PICKAXE) ||
-                                item.equals(Items.DIAMOND_PICKAXE)
-                            ) &&
-                                    enchantments.stream().noneMatch(enchantmentRegistryEntry -> enchantmentRegistryEntry.getKey().get().getValue().getPath().equalsIgnoreCase("silk_touch"))
-                    ) {
-                        isSuitable.value = false;
-                    }
-                });
+                if(
+                        (
+                            item.equals(Items.NETHERITE_PICKAXE) ||
+                            item.equals(Items.DIAMOND_PICKAXE)
+                        ) &&
+                                enchantments.stream().noneMatch(enchantmentRegistryEntry -> enchantmentRegistryEntry.getKey().get().getValue().getPath().equalsIgnoreCase("silk_touch"))
+                ) {
+                    isSuitable.value = false;
+                }
 
                 BlockHitResult result = null;
 
