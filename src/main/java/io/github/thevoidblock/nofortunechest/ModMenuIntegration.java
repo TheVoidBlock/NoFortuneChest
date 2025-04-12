@@ -1,8 +1,8 @@
-package com.thevoidblock.nofortunechest;
+package io.github.thevoidblock.nofortunechest;
 
 import com.terraformersmc.modmenu.api.ConfigScreenFactory;
 import com.terraformersmc.modmenu.api.ModMenuApi;
-import com.thevoidblock.nofortunechest.gui.ConfigMenu;
+import io.github.thevoidblock.nofortunechest.gui.ConfigMenu;
 
 public class ModMenuIntegration implements ModMenuApi {
     @Override

@@ -17,10 +17,10 @@
   "environment": "client",
   "entrypoints": {
     "client": [
-      "com.thevoidblock.nofortunechest.NoFortuneChest"
+      "io.github.thevoidblock.nofortunechest.NoFortuneChest"
     ],
     "modmenu": [
-      "com.thevoidblock.nofortunechest.ModMenuIntegration"
+      "io.github.thevoidblock.nofortunechest.ModMenuIntegration"
     ]
   },
   "depends": {

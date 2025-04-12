@@ -1,6 +1,6 @@
-package com.thevoidblock.nofortunechest.gui;
+package io.github.thevoidblock.nofortunechest.gui;
 
-import com.thevoidblock.nofortunechest.ModConfig;
+import io.github.thevoidblock.nofortunechest.ModConfig;
 import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.clothconfig2.api.ConfigBuilder;
 import me.shedaniel.clothconfig2.api.ConfigCategory;
@@ -8,7 +8,7 @@ import me.shedaniel.clothconfig2.api.ConfigEntryBuilder;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.text.Text;
 
-import static com.thevoidblock.nofortunechest.NoFortuneChest.MOD_ID;
+import static io.github.thevoidblock.nofortunechest.NoFortuneChest.MOD_ID;
 
 public class ConfigMenu {
     public static Screen getScreen(Screen parent) {

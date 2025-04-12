@@ -1,4 +1,4 @@
-package com.thevoidblock.nofortunechest;
+package io.github.thevoidblock.nofortunechest;
 
 import me.shedaniel.autoconfig.AutoConfig;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
