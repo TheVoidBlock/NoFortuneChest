@@ -14,6 +14,6 @@ public class ModConfig implements ConfigData {
     public int warningColor = 16711680;
 
     public boolean titleEnabled = true;
-    public String titleMessage = "Warning: you are holding a non Silk Touch pickaxe";
-    public int titleColor = 16711680;
+    public String titleMessage = "⚠";
+    public int titleColor = 16776960;
 }
