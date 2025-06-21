@@ -71,6 +71,7 @@ public class NonSilkWarning {
 
                 } else if(hasAttacked.value) {
                     client.inGameHud.clearTitle();
+                    client.inGameHud.setOverlayMessage(Text.empty(), false);
                     hasAttacked.value = false;
                 }
             }
