@@ -13,11 +13,12 @@ import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.HitResult;
 
 import java.util.Set;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class NonSilkWarning {
-
     public static void initializeDetection() {
-        var hasAttacked = new Object(){boolean value = false;};
+        AtomicBoolean hasAttacked = new AtomicBoolean(false);
+        AtomicBoolean hasLooked = new AtomicBoolean(false);
 
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
             ModConfig config = AutoConfig.getConfigHolder(ModConfig.class).getConfig();
@@ -27,9 +28,7 @@ public class NonSilkWarning {
                     client.player != null
             ) {
 
-                var isSuitable = new Object(){
-                    boolean value = true;
-                };
+                AtomicBoolean isSuitable = new AtomicBoolean(true);
 
                 ItemStack itemStack = client.player.getInventory().getSelectedStack();
 
@@ -41,9 +40,9 @@ public class NonSilkWarning {
                             item.equals(Items.NETHERITE_PICKAXE) ||
                             item.equals(Items.DIAMOND_PICKAXE)
                         ) &&
-                                enchantments.stream().noneMatch(enchantmentRegistryEntry -> enchantmentRegistryEntry.getKey().get().getValue().getPath().equalsIgnoreCase("silk_touch"))
+                        enchantments.stream().noneMatch(enchantmentRegistryEntry -> enchantmentRegistryEntry.getKey().get().getValue().getPath().equalsIgnoreCase("silk_touch"))
                 ) {
-                    isSuitable.value = false;
+                    isSuitable.set(false);
                 }
 
                 BlockHitResult result = null;
@@ -53,26 +52,30 @@ public class NonSilkWarning {
                         client.crosshairTarget.getType() == HitResult.Type.BLOCK
                 ) result = (BlockHitResult) client.crosshairTarget;
 
+                assert client.world != null;
+
                 if (
-                        !isSuitable.value &&
+                        !isSuitable.get() &&
                         result != null && result.getType() == BlockHitResult.Type.BLOCK &&
                         client.world.getBlockState(result.getBlockPos()).getBlock() == Blocks.ENDER_CHEST
                 ) {
+                    hasLooked.set(true);
                     if(config.warningEnabled) client.player.sendMessage(Text.literal(config.warningMessage).withColor(config.warningColor), true);
 
                     if(
                             config.titleEnabled &&
                             client.options.attackKey.isPressed() &&
-                            !hasAttacked.value
+                            !hasAttacked.get()
                     ) {
                         client.inGameHud.setTitle(Text.literal(config.titleMessage).withColor(config.titleColor));
-                        hasAttacked.value = true;
+                        hasAttacked.set(true);
                     }
 
-                } else if(hasAttacked.value) {
+                } else if(hasLooked.get()) {
                     client.inGameHud.clearTitle();
                     client.inGameHud.setOverlayMessage(Text.empty(), false);
-                    hasAttacked.value = false;
+                    hasAttacked.set(false);
+                    hasLooked.set(false);
                 }
             }
         });
