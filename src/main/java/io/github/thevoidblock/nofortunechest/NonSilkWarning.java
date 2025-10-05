@@ -11,6 +11,7 @@ import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.text.Text;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.HitResult;
+import net.minecraft.world.GameMode;
 
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -25,7 +26,8 @@ public class NonSilkWarning {
 
             if(
                     config.modEnabled &&
-                    client.player != null
+                    client.player != null &&
+                    client.player.getGameMode() == GameMode.SURVIVAL
             ) {
 
                 AtomicBoolean isSuitable = new AtomicBoolean(true);
