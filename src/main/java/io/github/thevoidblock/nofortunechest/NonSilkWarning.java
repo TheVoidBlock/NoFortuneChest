@@ -26,7 +26,7 @@ public class NonSilkWarning {
             ModConfig config = AutoConfig.getConfigHolder(ModConfig.class).getConfig();
 
             if(
-                    config.modEnabled &&
+                    config.enabled &&
                     client.player != null &&
                     client.gameMode != null &&
                     client.gameMode.getPlayerMode() == GameType.SURVIVAL
@@ -64,10 +64,10 @@ public class NonSilkWarning {
                         client.level.getBlockState(result.getBlockPos()).getBlock() == Blocks.ENDER_CHEST
                 ) {
                     hasLooked.set(true);
-                    if(config.warningEnabled) client.player.sendOverlayMessage(Component.literal(config.warningMessage).withColor(config.warningColor));
+                    if(config.actionBar) client.player.sendOverlayMessage(Component.literal(config.actionBarMessage).withColor(config.actionBarColor));
 
                     if(
-                            config.titleEnabled &&
+                            config.title &&
                             client.options.keyAttack.isDown() &&
                             !hasAttacked.get()
                     ) {
