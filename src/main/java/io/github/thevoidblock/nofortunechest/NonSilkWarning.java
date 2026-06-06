@@ -2,16 +2,17 @@ package io.github.thevoidblock.nofortunechest;
 
 import me.shedaniel.autoconfig.AutoConfig;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
-import net.minecraft.block.Blocks;
-import net.minecraft.enchantment.Enchantment;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.registry.entry.RegistryEntry;
-import net.minecraft.text.Text;
-import net.minecraft.util.hit.BlockHitResult;
-import net.minecraft.util.hit.HitResult;
-import net.minecraft.world.GameMode;
+import net.minecraft.core.Holder;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.Enchantments;
+import net.minecraft.world.level.GameType;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.HitResult;
 
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -27,14 +28,15 @@ public class NonSilkWarning {
             if(
                     config.modEnabled &&
                     client.player != null &&
-                    client.player.getGameMode() == GameMode.SURVIVAL
+                    client.gameMode != null &&
+                    client.gameMode.getPlayerMode() == GameType.SURVIVAL
             ) {
 
                 AtomicBoolean isSuitable = new AtomicBoolean(true);
 
-                ItemStack itemStack = client.player.getInventory().getSelectedStack();
+                ItemStack itemStack = client.player.getInventory().getSelectedItem();
 
-                Set<RegistryEntry<Enchantment>> enchantments = itemStack.getEnchantments().getEnchantments();
+                Set<Holder<Enchantment>> enchantments = itemStack.getEnchantments().keySet();
                 Item item = itemStack.getItem();
 
                 if(
@@ -42,7 +44,7 @@ public class NonSilkWarning {
                             item.equals(Items.NETHERITE_PICKAXE) ||
                             item.equals(Items.DIAMOND_PICKAXE)
                         ) &&
-                        enchantments.stream().noneMatch(enchantmentRegistryEntry -> enchantmentRegistryEntry.getKey().get().getValue().getPath().equalsIgnoreCase("silk_touch"))
+                        enchantments.stream().noneMatch(enchantment -> enchantment.is(Enchantments.SILK_TOUCH))
                 ) {
                     isSuitable.set(false);
                 }
@@ -50,32 +52,32 @@ public class NonSilkWarning {
                 BlockHitResult result = null;
 
                 if(
-                        client.crosshairTarget != null &&
-                        client.crosshairTarget.getType() == HitResult.Type.BLOCK
-                ) result = (BlockHitResult) client.crosshairTarget;
+                        client.hitResult != null &&
+                        client.hitResult.getType() == HitResult.Type.BLOCK
+                ) result = (BlockHitResult) client.hitResult;
 
-                assert client.world != null;
+                assert client.level != null;
 
                 if (
                         !isSuitable.get() &&
-                        result != null && result.getType() == BlockHitResult.Type.BLOCK &&
-                        client.world.getBlockState(result.getBlockPos()).getBlock() == Blocks.ENDER_CHEST
+                        result != null && result.getType() == HitResult.Type.BLOCK &&
+                        client.level.getBlockState(result.getBlockPos()).getBlock() == Blocks.ENDER_CHEST
                 ) {
                     hasLooked.set(true);
-                    if(config.warningEnabled) client.player.sendMessage(Text.literal(config.warningMessage).withColor(config.warningColor), true);
+                    if(config.warningEnabled) client.player.sendOverlayMessage(Component.literal(config.warningMessage).withColor(config.warningColor));
 
                     if(
                             config.titleEnabled &&
-                            client.options.attackKey.isPressed() &&
+                            client.options.keyAttack.isDown() &&
                             !hasAttacked.get()
                     ) {
-                        client.inGameHud.setTitle(Text.literal(config.titleMessage).withColor(config.titleColor));
+                        client.gui.setTitle(Component.literal(config.titleMessage).withColor(config.titleColor));
                         hasAttacked.set(true);
                     }
 
                 } else if(hasLooked.get()) {
-                    client.inGameHud.clearTitle();
-                    client.inGameHud.setOverlayMessage(Text.empty(), false);
+                    client.gui.clearTitles();
+                    client.gui.setOverlayMessage(Component.empty(), false);
                     hasAttacked.set(false);
                     hasLooked.set(false);
                 }
