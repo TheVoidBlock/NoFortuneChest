@@ -1,4 +1,4 @@
-# [Modrinth](https://modrinth.com/mod/NoFortuneEnderChest)
+# No Fortune Chest
 
 Displays an action bar warning when you're looking at an Ender Chest with a Diamond/Netherite pickaxe that doesn't have Silk Touch.
 
