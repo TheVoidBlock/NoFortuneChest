@@ -2,6 +2,7 @@
   "text.autoconfig.nofortunechest.title": "No Fortune Chest",
 
   "text.autoconfig.nofortunechest.option.enabled": "Mod Enabled",
+  "text.autoconfig.nofortunechest.option.destroySpeedThreshold": "Ender Chest Destroy Speed Warning Threshold",
 
   "text.autoconfig.nofortunechest.option.title": "Title Warning",
   "text.autoconfig.nofortunechest.option.titleMessage": "Title Message",

@@ -10,6 +10,8 @@ import static io.github.thevoidblock.nofortunechest.NoFortuneChest.MOD_ID;
 public class ModConfig implements ConfigData {
     public boolean enabled = true;
 
+    public float destroySpeedThreshold = 8.0f;
+
     public boolean title = true;
     public String titleMessage = "⚠";
     @ConfigEntry.ColorPicker

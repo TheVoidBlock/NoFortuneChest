@@ -13,7 +13,7 @@ public class NoFortuneChest implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
         AutoConfig.register(ModConfig.class, GsonConfigSerializer::new);
-        NonSilkWarning.initializeDetection();
+        Warnings.initialize();
 
         LOGGER.info("{} initialized!", MOD_ID);
     }
