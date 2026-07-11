@@ -1,25 +1,14 @@
 {
-  "nofortunechestconfig.nofortunechest.config": "No Fortune Chest Config",
+  "text.autoconfig.nofortunechest.title": "No Fortune Chest",
 
-  "category.nofortunechest.general": "General",
+  "text.autoconfig.nofortunechest.option.enabled": "Mod Enabled",
+  "text.autoconfig.nofortunechest.option.destroySpeedThreshold": "Ender Chest Destroy Speed Warning Threshold",
 
-  "option.nofortunechest.mod_toggle": "Mod Enabled",
+  "text.autoconfig.nofortunechest.option.title": "Title Warning",
+  "text.autoconfig.nofortunechest.option.titleMessage": "Title Message",
+  "text.autoconfig.nofortunechest.option.titleColor": "Title Color",
 
-
-  "option.nofortunechest.warning_toggle": "Action Bar Warning",
-
-  "option.nofortunechest.warning_message": "Action Bar Warning Message",
-  "tooltip.nofortunechest.warning_message": "Sets the action bar warning message",
-
-  "option.nofortunechest.warning_color": "Action Bar Warning Color",
-  "tooltip.nofortunechest.warning_color": "Sets the action bar warning color",
-
-
-  "option.nofortunechest.title_toggle": "Title Warning",
-
-  "option.nofortunechest.title_message": "Title Warning Message",
-  "tooltip.nofortunechest.title_message": "Sets the Title warning message",
-
-  "option.nofortunechest.title_color": "Title Warning Color",
-  "tooltip.nofortunechest.title_color": "Sets the Title warning color"
+  "text.autoconfig.nofortunechest.option.actionBar": "Action Bar Warning",
+  "text.autoconfig.nofortunechest.option.actionBarMessage": "Action Bar Message",
+  "text.autoconfig.nofortunechest.option.actionBarColor": "Action Bar Color"
 }
