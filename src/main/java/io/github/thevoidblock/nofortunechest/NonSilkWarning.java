@@ -71,13 +71,13 @@ public class NonSilkWarning {
                             client.options.keyAttack.isDown() &&
                             !hasAttacked.get()
                     ) {
-                        client.gui.setTitle(Component.literal(config.titleMessage).withColor(config.titleColor));
+                        client.gui.hud.setTitle(Component.literal(config.titleMessage).withColor(config.titleColor));
                         hasAttacked.set(true);
                     }
 
                 } else if(hasLooked.get()) {
-                    client.gui.clearTitles();
-                    client.gui.setOverlayMessage(Component.empty(), false);
+                    client.gui.hud.clearTitles();
+                    client.gui.hud.setOverlayMessage(Component.empty(), false);
                     hasAttacked.set(false);
                     hasLooked.set(false);
                 }
