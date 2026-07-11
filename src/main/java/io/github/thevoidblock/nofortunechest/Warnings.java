@@ -25,18 +25,18 @@ public class Warnings {
         if(!config.enabled) return;
 
         if(config.actionBar && shouldShowWarning(config, minecraft)) {
-            minecraft.gui.setOverlayMessage(Component.literal(config.actionBarMessage).withColor(config.actionBarColor), false);
+            minecraft.gui.hud.setOverlayMessage(Component.literal(config.actionBarMessage).withColor(config.actionBarColor), false);
             warningShown = true;
         } else if(warningShown) {
-            minecraft.gui.setOverlayMessage(Component.empty(), false);
+            minecraft.gui.hud.setOverlayMessage(Component.empty(), false);
             warningShown = false;
         }
 
         if(config.title && shouldShowTitle(config, minecraft)) {
-            if(!titleShown) minecraft.gui.setTitle(Component.literal(config.titleMessage).withColor(config.titleColor));
+            if(!titleShown) minecraft.gui.hud.setTitle(Component.literal(config.titleMessage).withColor(config.titleColor));
             titleShown = true;
         } else if(titleShown) {
-            minecraft.gui.clearTitles();
+            minecraft.gui.hud.clearTitles();
             titleShown = false;
         }
     }
